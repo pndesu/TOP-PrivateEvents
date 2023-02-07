@@ -1,3 +1,18 @@
-<%= link_to "Sign In", user_session_path %>
-
+<% if user_signed_in?%>
+    <%= link_to "Sign Out", destroy_user_session_path, data: {turbo_method: :delete} %>
+    <%= link_to "Create Event", new_event_path %>
+<% else %>
+    <%= link_to "Sign In", user_session_path %>
+<% end %>
+<%= link_to "My Events", current_user %>
 <h1>Events</h1>
+
+<% Event.all.each do |event| %>
+<ul>
+    <li><%= event.name %></li>
+    <li><%= event.location %></li>
+    <li><%= event.date %></li>
+    <li>Created by: <%= event.creator.username %></li>
+    <li><%= link_to "Join Event", %></li>
+</ul>
+<% end %>

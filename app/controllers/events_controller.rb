@@ -9,9 +9,9 @@ class EventsController < ApplicationController
     end
 
     def create
-        @event = current_user.build_event(event_params)
+        @event = current_user.created_events.build(event_params)
         if @event.save
-            redirect_to user_path
+            redirect_to current_user
             flash[:notice] = "Event created succesfully!"
         else
             render :new, status: unprocessable_entity
@@ -20,6 +20,6 @@ class EventsController < ApplicationController
 
     private
     def event_params
-        params.require(:event).permit(:date, :location)
+        params.require(:event).permit(:name, :date, :location)
     end
 end
