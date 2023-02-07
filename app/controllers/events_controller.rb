@@ -18,6 +18,10 @@ class EventsController < ApplicationController
         end
     end
 
+    def attendees
+        @event = Event.find(params[:event_id])
+    end
+
     private
     def event_params
         params.require(:event).permit(:name, :date, :location)
