@@ -6,8 +6,18 @@ class InvitationsController < ApplicationController
             redirect_to root_path
             flash[:notice] = "Invitation sent!"
         else
-            redirect_to current_user
+            redirect_to root_path
             flash[:alert] = "Invitation failed!"
         end
     end 
+
+    def destroy
+        if current_user.invitations.find(params[:id]).destroy
+            redirect_to root_path
+            flash[:notice] = "You won't go to the party!"
+        else
+            redirect_to root_path
+            flash[:alert] = "Ooops! Something went wrong..."
+        end
+    end
 end
