@@ -1,7 +1,7 @@
-<h2> Name: <%= @event.name %> </h2>
-<h2> Location: <%= @event.location %> </h2>
-<h2> Date: <%= @event.date %> </h2>
-<h2> Created by: <%= @event.creator.username %></h2>
+<h4> Name: <%= @event.name %> </h4>
+<h4> Location: <%= @event.location %> </h4>
+<h4> Date: <%= @event.date %> </h4>
+<h4> Created by: <%= @event.creator.username %></h4>
 <% if user_signed_in? %>
     <% if current_user.attended_events.any?{|attended_event| attended_event.id == @event.id} %>
         <% invitation_id = current_user.invitations.find_by(attended_event_id: @event.id).id %>
