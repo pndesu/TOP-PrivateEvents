@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+        
     def create
         @invitation = Invitation.new(attendee_id: current_user.id, attended_event_id: params[:attended_event_id])
 
