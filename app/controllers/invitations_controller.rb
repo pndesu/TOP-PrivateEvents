@@ -13,9 +13,10 @@ class InvitationsController < ApplicationController
     end 
 
     def destroy
-        if current_user.invitations.find(params[:id]).destroy
+        invitation = current_user.invitations.find(params[:id])
+        if invitation.destroy
             redirect_to root_path
-            flash[:notice] = "You won't go to the party!"
+            flash[:notice] = "You won't go to the party #{invitation.attended_event.name}!"
         else
             redirect_to root_path
             flash[:alert] = "Ooops! Something went wrong..."

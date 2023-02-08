@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "events#index"
   resources :events, only: [:index, :show, :new, :create] do
-    get "/attendees", :to => "events#attendees", :as => "attendees"
+    get "/attendees", to: "events#attendees", as: "attendees"
   end
-  resources :users, only: [:show], path: "/user"
+  resources :users, only: [:show] do
+    get "attended_events", to: "users#attended_events", as: "attended_events"
+  end
   resources :invitations, only: [:create, :destroy]
 end

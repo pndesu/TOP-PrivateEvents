@@ -1,0 +1,22 @@
+<% @user.attended_events.each do |attended_event|%>
+<ul>
+    <li>
+        <h2> Name: <%= attended_event.name %> </h2>
+        <h2> Location: <%= attended_event.location %> </h2>
+        <h2> Date: <%= attended_event.date %> </h2>
+        <h2> Created by: <%= attended_event.creator.username %></h2>
+        <% if user_signed_in? %>
+            <% if current_user.attended_events.any?{|event| event.id == attended_event.id} %>
+                <% invitation_id = current_user.invitations.find_by(attended_event_id: attended_event.id).id %>
+                <li><%= link_to "Unjoin Event", invitation_path(id: invitation_id), data: {turbo_method: :delete} %></li>
+            <% else %>
+                <li><%= link_to "Join Event", invitations_path(attended_event_id: attended_event.id), data: {turbo_method: :post} %></li>
+            <% end %>
+        <% else %>
+            <li><%= link_to "Join Event", invitations_path(attended_event_id: attended_event.id), data: {turbo_method: :post} %></li>
+        <% end %>
+        <li><%= link_to "View attendees", event_attendees_path(attended_event) %></li>
+        <li><%= link_to "Home", root_path %></li>
+    </li>
+</ul>
+<% end %>
