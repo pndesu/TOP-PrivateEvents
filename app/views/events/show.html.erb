@@ -1,3 +1,5 @@
+<li><%= link_to "Home", root_path %></li>
+
 <h4> Name: <%= @event.name %> </h4>
 <h4> Location: <%= @event.location %> </h4>
 <h4> Date: <%= @event.date %> </h4>
@@ -13,4 +15,3 @@
     <li><%= link_to "Join Event", invitations_path(attended_event_id: @event.id), data: {turbo_method: :post} %></li>
 <% end %>
 <li><%= link_to "View attendees", event_attendees_path(@event) %></li>
-<li><%= link_to "Home", root_path %></li>
