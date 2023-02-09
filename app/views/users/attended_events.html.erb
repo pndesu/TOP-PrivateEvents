@@ -12,14 +12,14 @@
                 <% if user_signed_in? %>
                     <% if current_user.attended_events.any?{|event| event.id == attended_event.id} %>
                         <% invitation_id = current_user.invitations.find_by(attended_event_id: attended_event.id).id %>
-                        <h4><%= link_to "Unjoin Event", invitation_path(id: invitation_id), data: {turbo_method: :delete} %></h4>
+                        <span><%= link_to "Unjoin Event", invitation_path(id: invitation_id), data: {turbo_method: :delete} %></span>
                     <% else %>
-                        <h4><%= link_to "Join Event", invitations_path(attended_event_id: attended_event.id), data: {turbo_method: :post} %></h4>
+                        <span><%= link_to "Join Event", invitations_path(attended_event_id: attended_event.id), data: {turbo_method: :post} %></span>
                     <% end %>
                 <% else %>
-                    <h4><%= link_to "Join Event", invitations_path(attended_event_id: attended_event.id), data: {turbo_method: :post} %></h4>
+                    <span><%= link_to "Join Event", invitations_path(attended_event_id: attended_event.id), data: {turbo_method: :post} %></span>
                 <% end %>
-                <h4><%= link_to "View attendees", event_attendees_path(attended_event) %></h4>
+                <span><%= link_to "View attendees", event_attendees_path(attended_event) %></span>
             </li>
         </ul>
     <% end %>
@@ -36,14 +36,14 @@
                 <% if user_signed_in? %>
                     <% if current_user.attended_events.any?{|event| event.id == attended_event.id} %>
                         <% invitation_id = current_user.invitations.find_by(attended_event_id: attended_event.id).id %>
-                        <h4><%= link_to "Unjoin Event", invitation_path(id: invitation_id), data: {turbo_method: :delete} %></h4>
+                        <span><%= link_to "Unjoin Event", invitation_path(id: invitation_id), data: {turbo_method: :delete} %></span>
                     <% else %>
-                        <h4><%= link_to "Join Event", invitations_path(attended_event_id: attended_event.id), data: {turbo_method: :post} %></h4>
+                        <span><%= link_to "Join Event", invitations_path(attended_event_id: attended_event.id), data: {turbo_method: :post} %></span>
                     <% end %>
                 <% else %>
-                    <h4><%= link_to "Join Event", invitations_path(attended_event_id: attended_event.id), data: {turbo_method: :post} %></h4>
+                    <span><%= link_to "Join Event", invitations_path(attended_event_id: attended_event.id), data: {turbo_method: :post} %></span>
                 <% end %>
-                <h4><%= link_to "View attendees", event_attendees_path(attended_event) %></h4>
+                <span><%= link_to "View attendees", event_attendees_path(attended_event) %></span>
             </li>
         </ul>
     <% end %>

@@ -1,4 +1,4 @@
-<li><%= link_to "Home", root_path %></li>
+<h4><%= link_to "Home", root_path %></h4>
 
 <h4> Name: <%= @event.name %> </h4>
 <h4> Location: <%= @event.location %> </h4>
@@ -7,11 +7,11 @@
 <% if user_signed_in? %>
     <% if current_user.attended_events.any?{|attended_event| attended_event.id == @event.id} %>
         <% invitation_id = current_user.invitations.find_by(attended_event_id: @event.id).id %>
-        <li><%= link_to "Unjoin Event", invitation_path(id: invitation_id), data: {turbo_method: :delete} %></li>
+        <span><%= link_to "Unjoin Event", invitation_path(id: invitation_id), data: {turbo_method: :delete} %></span>
     <% else %>
-        <li><%= link_to "Join Event", invitations_path(attended_event_id: @event.id), data: {turbo_method: :post} %></li>
+        <span><%= link_to "Join Event", invitations_path(attended_event_id: @event.id), data: {turbo_method: :post} %></span>
     <% end %>
 <% else %>
-    <li><%= link_to "Join Event", invitations_path(attended_event_id: @event.id), data: {turbo_method: :post} %></li>
+    <span><%= link_to "Join Event", invitations_path(attended_event_id: @event.id), data: {turbo_method: :post} %></span>
 <% end %>
-<li><%= link_to "View attendees", event_attendees_path(@event) %></li>
+<span><%= link_to "View attendees", event_attendees_path(@event) %></span>
