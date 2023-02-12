@@ -1,0 +1,9 @@
+<%= link_to "Home", root_path %>
+
+<h1>Invited Events</h1>
+
+<% Invitation.where(attendee_id: @user.id, requested: true).each do |invitation| %>
+    <ul>
+        <li>You have been invited to <%= link_to "#{invitation.attended_event.name}", event_path(invitation.attended_event) %></li>
+    </ul>
+<% end %>

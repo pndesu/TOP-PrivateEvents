@@ -8,10 +8,18 @@
     <% if current_user.attended_events.any?{|attended_event| attended_event.id == @event.id} %>
         <% invitation_id = current_user.invitations.find_by(attended_event_id: @event.id).id %>
         <span><%= link_to "Unjoin Event", invitation_path(id: invitation_id), data: {turbo_method: :delete} %></span>
+        <span><%= link_to "Edit Event", edit_event_path(@event) %></span>
+        <span><%= link_to "Delete Event", event_path(@event), data: {turbo_method: :delete} %></span>
+        <span><%= link_to "Invite User", view_user_list_path(event_id: @event.id) %></span>
+        <span><%= link_to "View attendees", event_attendees_path(@event) %></span>
     <% else %>
-        <span><%= link_to "Join Event", invitations_path(attended_event_id: @event.id), data: {turbo_method: :post} %></span>
+        <span><%= link_to "Join Event", invitations_path(attendee_id: current_user.id, attended_event_id: @event.id, requested: false, accepted: true), data: {turbo_method: :post} %></span>
+        <span><%= link_to "Edit Event", edit_event_path(@event) %></span>
+        <span><%= link_to "Delete Event", event_path(@event), data: {turbo_method: :delete} %></span>
+        <span><%= link_to "Invite User", view_user_list_path(event_id: @event.id) %></span>
+        <span><%= link_to "View attendees", event_attendees_path(@event) %></span>
     <% end %>
 <% else %>
-    <span><%= link_to "Join Event", invitations_path(attended_event_id: @event.id), data: {turbo_method: :post} %></span>
+    <span><%= link_to "Join Event", invitations_path(attended_event_id: @event.id, requested: false, accepted: true), data: {turbo_method: :post} %></span>
+    <span><%= link_to "View attendees", event_attendees_path(@event) %></span>
 <% end %>
-<span><%= link_to "View attendees", event_attendees_path(@event) %></span>

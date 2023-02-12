@@ -1,0 +1,7 @@
+<%= link_to "Back", user_created_events_path(current_user)%>
+<% attendee_list = Invitation.where(attended_event_id: params[:event_id]).select(:attendee_id) %>
+<% User.where.not(id: current_user.id).where.not(id: attendee_list).each do |user| %>
+    <ul>
+        <li><%= link_to "#{user.username}", invitations_path(attendee_id: user.id, attended_event_id: params[:event_id], requested: true, accepted: false), data: {turbo_method: :post} %></li>
+    </ul>
+<% end %>

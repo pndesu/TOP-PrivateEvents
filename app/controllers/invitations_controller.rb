@@ -1,7 +1,7 @@
 class InvitationsController < ApplicationController
         
     def create
-        @invitation = Invitation.new(attendee_id: current_user.id, attended_event_id: params[:attended_event_id])
+        @invitation = Invitation.new(attendee_id: params[:attendee_id], attended_event_id: params[:attended_event_id], requested: params[:requested], accepted: params[:accepted])
 
         if @invitation.save
             redirect_back(fallback_location: root_path)

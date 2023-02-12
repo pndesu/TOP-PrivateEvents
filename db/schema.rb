@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_07_102702) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_12_062312) do
   create_table "events", force: :cascade do |t|
     t.datetime "date"
     t.string "location"
@@ -26,6 +26,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_102702) do
     t.integer "attended_event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "requested", default: false, null: false
+    t.boolean "accepted", default: false, null: false
     t.index ["attended_event_id"], name: "index_invitations_on_attended_event_id"
     t.index ["attendee_id"], name: "index_invitations_on_attendee_id"
   end
@@ -39,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_102702) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
